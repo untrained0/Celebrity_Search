@@ -1,5 +1,5 @@
 import os
-from constants import openai_key
+from dotenv import load_dotenv
 from langchain.llms import OpenAI
 from langchain import PromptTemplate
 from langchain.chains import LLMChain
@@ -8,6 +8,13 @@ from langchain.memory import ConversationBufferMemory
 
 import streamlit as st
 
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the API key from the environment
+openai_key = os.getenv("OPENAI_API_KEY")
+
+# Set the API key in the environment
 os.environ["OPENAI_API_KEY"] = openai_key
 
 # streamlit Framework
@@ -63,5 +70,5 @@ if input_text:
     with st.expander('Person Name'):
         st.info(person_memory.buffer)
 
-    with st.expander('Events Occured'):
+    with st.expander('Events Occurred'):
         st.info(events_memory.buffer)
